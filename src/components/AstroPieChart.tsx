@@ -3,7 +3,7 @@ import React from "react";
 function AstroPieChart() {
   const dotStyle =
     "w-[12px] h-[12px] absolute bottom-0 translate-y-[6px] bg-orange-400 rounded-full";
-
+    
   return (
     <div className="">
         
