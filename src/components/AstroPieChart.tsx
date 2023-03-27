@@ -32,12 +32,12 @@ function AstroPieChart() {
 
       {/* labels */}
       <div className=" w-[100%] flex justify-between px-4 py-6">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col items-center gap-1">
           <span className="font-medium"> Sunrise </span>
           <span className="text-sm text-slate-400"> 6:24 am </span>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="font-medium"> Sunrise </span>
+        <div className="flex flex-col items-center gap-1">
+          <span className="font-medium"> Sunset </span>
           <span className="text-sm text-slate-400"> 6:24 am </span>
         </div>
       </div>

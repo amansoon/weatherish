@@ -9,6 +9,7 @@ import SearchBox from "@/components/SearchBox";
 import WeatherGraph from "@/components/WeatherGraph";
 import WeatherStats from "@/components/WeatherStats";
 
+import { Calendar, PinAlt } from "iconoir-react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -23,19 +24,22 @@ export default function Home() {
       <main className="flex">
         <Navbar />
 
-        <div className="w-[100%] flex flex-col justify-between p-8 bg-slate-100">
+        <div className="w-[100%] flex flex-col justify-between px-8 py-4 bg-slate-50">
           {/* header */}
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             {/* wish */}
             <div className="">
-              <div className="text-2xl font-semibold"> Hello, Aman </div>
+              <div className="flex items-center gap-2 text-lg text-slate-700">
+                <Icon> <Calendar /> </Icon>
+                <span> January 25, 2023 </span>
+              </div>
             </div>
 
             {/* search location */}
             <SearchBox />
           </div>
 
-          <WeatherStats/>
+          <WeatherStats />
           <WeatherGraph />
         </div>
 

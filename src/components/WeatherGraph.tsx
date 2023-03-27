@@ -38,16 +38,16 @@ function WeatherGraph() {
             <CartesianGrid
               horizontal={false}
               strokeWidth={1}
-              stroke="#d6d6d6"
+              stroke="#ededed"
             />
             <Line
               type="monotone"
               dataKey="temp"
-              stroke="#8c4aff"
+              stroke="#ff9124"
               strokeWidth={1.5}
               dot={{
-                fill: "blue",
-                stroke: "blue",
+                fill: "#ff9124",
+                stroke: "#ff9124",
                 strokeWidth: 1.2,
                 r: 4,
               }}
