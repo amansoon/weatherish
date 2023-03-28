@@ -2,6 +2,7 @@ import React from "react";
 import AstroPieChart from "./AstroPieChart";
 import Icon from "./Icon";
 import { CloudSunny } from "iconoir-react";
+import { Sun } from "react-feather";
 
 function Sidebar(): JSX.Element {
   return (
@@ -16,17 +17,34 @@ function Sidebar(): JSX.Element {
 
       <AstroPieChart />
 
+      <UVIndex />
 
-    
-      <h3 className="text-2xl font-medium mb-6 mt-4"> Weather Prediction  </h3>
+      <h3 className="text-2xl font-medium mb-6 mt-6"> Weather Prediction </h3>
 
       <ForcaseDay />
       <ForcaseDay />
-      <ForcaseDay />
-     
     </div>
   );
 }
+
+const UVIndex = () => {
+  return (
+    <div className="flex items-center gap-5 px-6 py-5 text-white bg-slate-900 rounded-xl">
+      <div>
+        <Sun size={28} strokeWidth={1.4} />
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="leading-none flex items-center gap-4">
+          <span className="text-2xl"> 20 UVI </span>
+          <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium"> Moderate </span>
+        </div>
+        <div className="leading-none text-slate-400">
+          Modirate risk of UV rays
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ForcaseDay = () => {
   return (
@@ -37,8 +55,8 @@ const ForcaseDay = () => {
         </Icon>
       </span>
       <div className="flex flex-col">
-         <span> Nov 24 </span>
-         <span className="text-lg font-medium">Cloudy</span>
+        <span> Nov 24 </span>
+        <span className="text-lg font-medium">Cloudy</span>
       </div>
       <div className="text-lg text-orange-500 ml-auto"> 26° / 18° </div>
     </div>

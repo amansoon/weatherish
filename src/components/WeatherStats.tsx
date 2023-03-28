@@ -11,10 +11,14 @@ function WeatherStats() {
     <div className="h-[350px] flex gap-6">
       {/* temperature */}
       <div className="w-1/2 flex flex-col justify-between rounded-2xl p-6 shadow-slate-100 bg-[url('/weather/sky.png')]">
-        <div className="flex justify-between items-center">
+        <div className="flex gap-5 items-center">
           <span className="p-3 rounded-full bg-white text-orange-500">
             <Cloud size={22} strokeWidth={1.5} />
           </span>
+          <div className="flex flex-col">
+            <span className="text-xl font-medium mb-1"> Weather </span>
+            <span className=""> What's the weather. </span>
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -40,10 +44,14 @@ function WeatherStats() {
 
       {/* wind and air quality */}
       <div className="w-1/2 flex flex-col justify-between rounded-2xl p-6 bg-white shadow-lg shadow-slate-100  bg-[url('/weather/clouds.jpg')] bg-cover">
-        <div className="flex justify-between items-center">
+        <div className="flex gap-5 items-center text-white">
           <span className="p-3 rounded-full bg-white text-orange-500">
             <Wind size={22} strokeWidth={1.5} />
           </span>
+          <div className="flex flex-col">
+            <span className="text-xl font-medium mb-1"> Air Quality </span>
+            <span className=""> Main Pollutant : PM 2.5 </span>
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <span className="text-4xl font-medium"> 82 </span>
@@ -55,9 +63,8 @@ function WeatherStats() {
             <span> Hazardous </span>
           </div>
           {/* meter */}
-          <div className="w-full h-[10px] rounded-lg bg-slate-200 relative">
+          <div className="w-full h-[8px] rounded-lg bg-slate-200 relative">
             <span className="absolute left-0 top-0 bottom-0 w-[35%] rounded-lg bg-green-600">
-
             </span>
           </div>
         </div>

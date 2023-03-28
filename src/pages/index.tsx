@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Eater, Inter, Yaldevi} from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
@@ -10,7 +10,7 @@ import WeatherGraph from "@/components/WeatherGraph";
 import WeatherStats from "@/components/WeatherStats";
 
 import { Calendar, PinAlt } from "iconoir-react";
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Yaldevi({ subsets: ["latin"] });
 
 export default function Home() {
   return (
