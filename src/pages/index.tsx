@@ -24,20 +24,20 @@ export default function Home() {
       <main className="flex">
         <Navbar />
 
-        <div className="w-[100%] flex flex-col justify-between px-8 py-4 bg-slate-50">
+        <div className="w-[100%] flex flex-col gap-8 justify-between px-8 py-4 bg-slate-50">
           {/* header */}
-          <div className="flex justify-between items-center">
-            {/* wish */}
+          {/* <div className="flex justify-between items-center">
             <div className="">
               <div className="flex items-center gap-2 text-lg text-slate-700">
-                <Icon> <Calendar /> </Icon>
+                <Icon>
+                  {" "}
+                  <Calendar />{" "}
+                </Icon>
                 <span> January 25, 2023 </span>
               </div>
             </div>
-
-            {/* search location */}
             <SearchBox />
-          </div>
+          </div> */}
 
           <WeatherStats />
           <WeatherGraph />
