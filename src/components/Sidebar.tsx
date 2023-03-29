@@ -54,9 +54,9 @@ const ForcaseDay = () => {
           <CloudSunny />
         </Icon>
       </span>
-      <div className="flex flex-col">
-        <span> Nov 24 </span>
-        <span className="text-lg font-medium">Cloudy</span>
+      <div className="flex flex-col gap-1">
+        <span> November 10 </span>
+        <span className="text-lg font-medium"> Cloudy </span>
       </div>
       <div className="text-lg text-orange-500 ml-auto"> 26° / 18° </div>
     </div>
