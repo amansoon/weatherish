@@ -1,47 +1,63 @@
-import { useReducer } from "react";
+import { useReducer, useContext } from "react";
 import { createContext } from "react";
-import { reducer } from "./reducer.ts";
+import { reducer } from "./reducer";
+import { ReactNode } from "react";
+import { AppAction, AppActionType, AppState} from "@/@types/globals";
 
 const AppContext = createContext("app");
 
-type AppState = {
-  search: null | object;
-  currentWeather: null | object;
-  currentAstro: null | object;
-  forecastWeather: null | object;
-  isWeatherLoading: boolean;
-};
-
-type ActionKind = {
-    type: string,
-    payload: any,
-}
-
 const initialState: AppState = {
-  search: null,
+  city: null,
   currentWeather: null,
   currentAstro: null,
   forecastWeather: null,
   isWeatherLoading: false,
 };
 
-type AppProviderProps = {
-  children?: (string | JSX.Element) | (string | JSX.Element)[];
+type childrenPropType = {
+  children: ReactNode;
 };
 
-export default function AppProvider({ children }: AppProviderProps) {
+function AppProvider({ children }: childrenPropType) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
-    search,
+    city,
     currentAstro,
     currentWeather,
     forecastWeather,
     isWeatherLoading,
-  } = Object(state);
+  } = state as AppState;
+
+  console.log(dispatch);
+
+  const setCity = (city: string) => {
+    const action: AppAction = {
+      type: AppActionType.SET_CITY,
+      payload: city,
+    };
+    dispatch(action);
+  };
 
   return (
-    <AppContext.Provider value={[state, dispatch]}>
+    <AppContext.Provider
+      value={{
+        city,
+        currentWeather,
+        currentAstro,
+        forecastWeather,
+        isWeatherLoading,
+
+        setCity,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
 }
+
+// custom hook
+export const useAppContext = () => {
+  return useContext(AppContext);
+};
+
+export default AppProvider;

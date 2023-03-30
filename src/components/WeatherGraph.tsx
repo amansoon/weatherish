@@ -15,23 +15,23 @@ import {
 const data = [
   {
     time: "Yesterday",
-    temp: 40,
+    temp: 0,
   },
   {
     time: "Morning",
-    temp: 35,
+    temp: 10,
   },
   {
     time: "Afternoon",
-    temp: 85,
+    temp: 15,
   },
   {
     time: "Evening",
-    temp: 30,
+    temp: -20,
   },
   {
     time: "Night",
-    temp: 12,
+    temp: -5,
   },
   {
     time: "tomorrow",
@@ -53,7 +53,7 @@ function WeatherGraph() {
           {/* line-graph and axis */}
           <div className="h-full w-[135%] flex flex-col gap-2 absolute">
             <ResponsiveContainer width={"100%"}>
-              <LineChart data={data}  margin={{ top: 50 }}>
+              <LineChart data={data}  margin={{ top: 50, bottom: 10 }}>
                 <CartesianGrid
                   horizontal={false}
                   vertical={false}
@@ -123,8 +123,6 @@ const XAxisLabel = ({ temp, time }: XAxisLabelProps) => {
 
 const CustomizedLabel = (props: DotProps) => {
   const { x, y, stroke } = props;
-
-  console.log(props);
 
   return (
     <svg

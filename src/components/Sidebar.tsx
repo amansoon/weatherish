@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AstroPieChart from "./AstroPieChart";
 import Icon from "./Icon";
 import { CloudSunny } from "iconoir-react";
 import { Sun } from "react-feather";
 
-function Sidebar(): JSX.Element {
+import { useAppContext } from "@/context/context";
+
+function Sidebar() {
+  const state = useAppContext();
+
+  useEffect(() => {
+    state.setCity("delhi");
+  }, []);
+
+  console.log(state);
+
   return (
     <div className="h-screen w-[550px] px-8 py-6 bg-slate-100">
       <header className="flex justify-between items-center mb-8 pb-4 border-b ">
@@ -36,7 +46,10 @@ const UVIndex = () => {
       <div className="flex flex-col gap-3">
         <div className="leading-none flex items-center gap-4">
           <span className="text-2xl"> 20 UVI </span>
-          <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium"> Moderate </span>
+          <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium">
+            {" "}
+            Moderate{" "}
+          </span>
         </div>
         <div className="leading-none text-slate-400">
           Modirate risk of UV rays
