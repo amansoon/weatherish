@@ -8,18 +8,10 @@ export function reducer(state: AppState, action: AppAction): AppState {
   }
 
   if (type === AppActionType.SET_WEATHER) {
-    return { ...state, weather: payload };
+    return { ...state, ...payload };
   }
 
-  if (type === AppActionType.SET_FORECAST) {
-    return { ...state, forecast: payload };
-  }
-
-  if (type === AppActionType.SET_ASTROLOGY) {
-    return { ...state, astrology: payload };
-  }
-
-  if (type === AppActionType.SET_LOADING) {
+  if (type === AppActionType.SET_WEATHER_LOADING) {
     return { ...state, isWeatherLoading: payload };
   }
 

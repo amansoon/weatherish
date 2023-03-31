@@ -10,12 +10,10 @@ const AppContext = createContext("app");
 const initialState: AppState = {
   city: null,
   weather: null,
-  astrology: null,
+  astronomy: null,
   forecast: null,
 
   isWeatherLoading: false,
-  isForecastLoading: false,
-  isAstrologyLoading: false,
 };
 
 type childrenPropType = {
@@ -27,59 +25,43 @@ const WEATHER_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
 function AppProvider({ children }: childrenPropType) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { city, astrology, weather, forecast, isWeatherLoading } =
+  const { city, astronomy, weather, forecast, isWeatherLoading } =
     state as AppState;
 
   useEffect(() => {
     if (city) {
-      fetchWeather();
-      fetchAstrology();
-      fetchForecast();
+      fetchData();
     }
   }, [city]);
 
-  const fetchWeather = async () => {
+
+  const fetchData = async () => {
     const WEATHER_URL = `${BASE_URL}/current.json?key=${WEATHER_KEY}&q=${city}&aqi=${"yes"}`;
-    try {
-      const res = await axios.get(WEATHER_URL);
-      console.log("weather", res);
-      if (res.status === 200) {
-        dispatch({ type: AppActionType.SET_WEATHER, payload: res.data });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchAstrology = async () => {
     const ASTRO_URL = `${BASE_URL}/astronomy.json?key=${WEATHER_KEY}&q=${city}`;
-    try {
-      const res = await axios.get(ASTRO_URL);
-      console.log("astro", res);
-      if (res.status === 200) {
-        dispatch({
-          type: AppActionType.SET_ASTROLOGY,
-          payload: res.data.astronomy.astro,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchForecast = async () => {
     const FORECAST_URL = `${BASE_URL}/forecast.json?key=${WEATHER_KEY}&q=${city}&days=${3}&alerts=${"yes"}`;
+
     try {
-      const res = await axios.get(FORECAST_URL);
-      console.log("forecast", res);
-      if (res.status === 200) {
-        dispatch({
-          type: AppActionType.SET_FORECAST,
-          payload: res.data.forecast.forecastday,
-        });
+      dispatch({ type: AppActionType.SET_WEATHER_LOADING, payload: true });
+      const weatherRes = await axios.get(WEATHER_URL);
+      const astroRes = await axios.get(ASTRO_URL);
+      const forecastRes = await axios.get(FORECAST_URL);
+
+      if (
+        weatherRes.status === 200 &&
+        astroRes.status === 200 &&
+        forecastRes.status === 200
+      ) {
+        const payloadData = {
+          weather: weatherRes.data,
+          astronomy: astroRes.data.astronomy.astro,
+          forecast: forecastRes.data.forecast.forecastday,
+          isWeatherLoading: false,
+        };
+        dispatch({ type: AppActionType.SET_WEATHER, payload: payloadData });
       }
     } catch (error) {
       console.log(error);
+      dispatch({ type: AppActionType.SET_WEATHER_LOADING, payload: false });
     }
   };
 
@@ -92,7 +74,7 @@ function AppProvider({ children }: childrenPropType) {
       value={{
         city,
         weather,
-        astrology,
+        astronomy,
         forecast,
         isWeatherLoading,
 
