@@ -1,4 +1,5 @@
-import React from "react";
+import { useAppContext } from "@/context/context";
+import React, { useState, useEffect } from "react";
 
 import {
   LineChart,
@@ -40,6 +41,16 @@ const data = [
 ];
 
 function WeatherGraph() {
+  const {forecast} = useAppContext();
+  const [tempData, setTempData] = useState<Array<object>>()
+
+  useEffect(() => {
+     if(forecast) {
+        const hours = forecast[0];
+     }
+  }, [forecast])
+  
+
   return (
     <div className="flex pb-4 justify-between max-h-[400px] flex-1">
       <div className="w-[65%] flex flex-col">

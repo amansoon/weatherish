@@ -1,12 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-feather";
 import thunderstorm from "@/assets/images/thunderstorm.png";
 import { HeavyRain } from "iconoir-react";
 import { Wind, Cloud } from "react-feather";
 
 import myImage from "../assets/images/cloud.png";
+import { useAppContext } from "@/context/context";
 
 function WeatherStats() {
+  const {weather} = useAppContext();
+
+  const [temp, setTemp] = useState<string>()
+  const [condition, setCondition] = useState<string>()
+  const [pressure, setPressure] = useState<string>()
+  const [humidity, setHumidy] = useState<string>()
+  const [visibility, setVisibility] = useState<string>()
+  const [aqi, setAqi] = useState<string>()
+  const [aqiLevel, setAqiLevel] = useState<string>()
+  const [windDirection, setWindDirection] = useState<string>()
+  const [wind, setWind] = useState<string>()
+
+
+
+  useEffect(() => {
+    if(weather) {
+       setTemp(`${Math.round(weather.current.temp_c)}°C`)
+       setCondition(`${weather.current.condition.text}`)
+       setPressure(`${Math.round(weather.current.pressure_mb)}mb`)
+       setVisibility(`${weather.current.vis_km} km`)
+       setHumidy(`${Math.round(weather.current.humidity)}%`)
+       setAqi(`${Math.round(weather.current.air_quality['us-epa-index'])}`)
+       setAqiLevel(`${'Hazardous'}`)
+    
+       setWindDirection(`${expandDir(weather.current.wind_dir)} wind`)
+       setWindDirection(`${expandDir(weather.current.wind_dir)} wind`)
+
+    }
+  }, [weather])
+
+
+  const expandDir = (dir : string) => {
+    switch(dir) {
+      case 'E': return 'east'; break;
+      case 'W': return 'west'; break;
+      case 'N': return 'north'; break;
+      case 'S': return 'south'; break;
+
+      case 'SE': return 'south east'; break;
+      case 'SW': return 'south west'; break;
+      case 'NE': return 'north east'; break;
+      case 'NW': return 'noth west'; break;
+
+      default: return 'N'; break;
+    }
+  }
+
+
   return (
     <div className="h-[350px] flex gap-6">
       {/* temperature */}
@@ -22,22 +71,22 @@ function WeatherStats() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-4xl font-medium"> 34°C </span>
-          <span className=""> Partly Cloudy </span>
+          <span className="text-4xl font-medium"> {temp} </span>
+          <span className=""> {condition} </span>
         </div>
 
         <div className="flex gap-3 leading-none">
           <div className="w-1/3 flex flex-col gap-2 justify-center items-center bg-slate-900 text-slate-50 rounded-xl p-5">
             <span> Pressure </span>
-            <span className="text-xl font-medium"> 800mb </span>
+            <span className="text-xl font-medium"> {pressure}  </span>
           </div>
           <div className="w-1/3 flex flex-col gap-2 items-center bg-yellow-200 rounded-xl p-5">
             <span> Visibility </span>
-            <span className="text-xl font-medium"> 4.3 km </span>
+            <span className="text-xl font-medium"> {visibility}  </span>
           </div>
           <div className="w-1/3 flex flex-col gap-2 items-center bg-white rounded-xl p-5">
             <span> Humidity </span>
-            <span className="text-xl font-medium"> 87% </span>
+            <span className="text-xl font-medium"> {humidity} </span>
           </div>
         </div>
       </div>
@@ -54,8 +103,8 @@ function WeatherStats() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="text-4xl font-medium"> 82 </span>
-          <span className=""> North West wind </span>
+          <span className="text-4xl font-medium"> {aqi}  </span>
+          <span className=""> {windDirection} </span>
         </div>
         <div className="flex flex-col gap-5 items-center bg-white rounded-xl p-5">
           <div className="w-full flex justify-between leading-none">

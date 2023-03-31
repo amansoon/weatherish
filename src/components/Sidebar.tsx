@@ -7,13 +7,6 @@ import { Sun } from "react-feather";
 import { useAppContext } from "@/context/context";
 
 function Sidebar() {
-  const state = useAppContext();
-
-  useEffect(() => {
-    state.setCity("delhi");
-  }, []);
-
-  console.log(state);
 
   return (
     <div className="h-screen w-[550px] px-8 py-6 bg-slate-100">

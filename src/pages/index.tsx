@@ -10,9 +10,16 @@ import WeatherGraph from "@/components/WeatherGraph";
 import WeatherStats from "@/components/WeatherStats";
 
 import { Calendar, PinAlt } from "iconoir-react";
+import { useAppContext } from "@/context/context";
 const roboto = Yaldevi({ subsets: ["latin"] });
 
 export default function Home() {
+  const {isWeatherLoading} = useAppContext();
+
+  if(isWeatherLoading) {
+     return <h1 className="font-3xl text-stone-500"> Loading data </h1>
+  }
+
   return (
     <>
       <Head>
