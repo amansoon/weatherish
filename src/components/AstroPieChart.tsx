@@ -1,11 +1,8 @@
 import { useAppContext } from "@/context/context";
 import React, { useEffect, useState } from "react";
 
-function AstroPieChart() {
-  const { astronomy } = useAppContext();
+function AstroPieChart({astronomy}) {
   const [dayElaped, setDayElapsed] = useState<number>(0);
-
-  console.log(astronomy)
 
   if(!astronomy) {
     return <h1> hello </h1>

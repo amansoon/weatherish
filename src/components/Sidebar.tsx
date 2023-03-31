@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AstroPieChart from "./AstroPieChart";
 import Icon from "./Icon";
 import { CloudSunny } from "iconoir-react";
@@ -7,6 +7,7 @@ import { Sun } from "react-feather";
 import { useAppContext } from "@/context/context";
 
 function Sidebar() {
+  const { weather, astronomy } = useAppContext();
 
   return (
     <div className="h-screen w-[550px] px-8 py-6 bg-slate-100">
@@ -18,9 +19,9 @@ function Sidebar() {
         <div className="text-4xl font-medium text-orange-500"> 24°C </div>
       </header>
 
-      <AstroPieChart />
+      <AstroPieChart astronomy={astronomy} />
 
-      <UVIndex />
+      <UVIndex uvIndex={weather?.current.uv} />
 
       <h3 className="text-2xl font-medium mb-6 mt-6"> Weather Prediction </h3>
 
@@ -30,7 +31,31 @@ function Sidebar() {
   );
 }
 
-const UVIndex = () => {
+const UVIndex = ({ uvIndex }) => {
+  const [message, setMessage] = useState<string>();
+  const [level, setLevel] = useState<string>();
+
+  useEffect(() => {
+    if (uvIndex) {
+      if (uvIndex <= 2) {
+        setMessage("No danger to the average person");
+        setLevel("Low");
+      } else if (uvIndex <= 5) {
+        setMessage("Little risk of harm from unprotected sun exposure");
+        setLevel("Moderate");
+      } else if (uvIndex <= 7) {
+        setMessage("High risk of harm from unprotected sun exposure");
+        setLevel("High");
+      } else if (uvIndex <= 10) {
+        setMessage("Very high risk of harm from unprotected sun exposure");
+        setLevel("Very High");
+      } else {
+        setMessage("Extreme risk of harm from unprotected sun exposure");
+        setLevel("Extreme");
+      }
+    }
+  }, [uvIndex]);
+
   return (
     <div className="flex items-center gap-5 px-6 py-5 text-white bg-slate-900 rounded-xl">
       <div>
@@ -38,14 +63,13 @@ const UVIndex = () => {
       </div>
       <div className="flex flex-col gap-3">
         <div className="leading-none flex items-center gap-4">
-          <span className="text-2xl"> 20 UVI </span>
+          <span className="text-2xl"> {uvIndex} UVI </span>
           <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium">
-            {" "}
-            Moderate{" "}
+            {level}
           </span>
         </div>
         <div className="leading-none text-slate-400">
-          Modirate risk of UV rays
+          {message}
         </div>
       </div>
     </div>
