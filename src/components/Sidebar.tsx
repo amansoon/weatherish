@@ -31,7 +31,11 @@ function Sidebar() {
   );
 }
 
-const UVIndex = ({ uvIndex }) => {
+type UVIndexProps = {
+   uvIndex: number
+}
+
+const UVIndex = ({ uvIndex } : UVIndexProps) => {
   const [message, setMessage] = useState<string>();
   const [level, setLevel] = useState<string>();
 
@@ -68,8 +72,8 @@ const UVIndex = ({ uvIndex }) => {
             {level}
           </span>
         </div>
-        <div className="leading-none text-slate-400">
-          {message}
+        <div className="text-slate-400">
+          {level} risk of UV rays.
         </div>
       </div>
     </div>

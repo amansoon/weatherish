@@ -54,11 +54,11 @@ function AstroPieChart({astronomy}) {
       <div className=" w-[100%] flex justify-between px-4 py-6">
         <div className="flex flex-col items-center gap-1">
           <span className="font-medium"> Sunrise </span>
-          <span className="text-sm text-slate-400"> {astronomy.sunrise} </span>
+          <span className="text-sm lowercase text-slate-400"> {astronomy.sunrise} </span>
         </div>
         <div className="flex flex-col items-center gap-1">
           <span className="font-medium"> Sunset </span>
-          <span className="text-sm text-slate-400"> {astronomy.sunset} </span>
+          <span className="text-sm lowercase text-slate-400"> {astronomy.sunset} </span>
         </div>
       </div>
     </div>

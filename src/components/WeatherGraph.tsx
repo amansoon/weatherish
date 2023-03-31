@@ -41,61 +41,80 @@ const data = [
 ];
 
 function WeatherGraph() {
-  const {forecast} = useAppContext();
-  const [tempData, setTempData] = useState<Array<object>>()
+  const { forecast } = useAppContext();
+  const [forecastData, setForecastData] = useState<Array<object>>([]);
 
   useEffect(() => {
-     if(forecast) {
-        const hours = forecast[0];
-     }
-  }, [forecast])
-  
+    if (forecast) {
+      const hours = forecast[0].hour;
+      const preMorning = { ...hours[6], time: "pre-morning" };
+      const morning = { ...hours[8], time: "morning" };
+      const afternoon = { ...hours[14], time: "afternoon" };
+      const evening = { ...hours[19], time: "evening" };
+      const night = { ...hours[23], time: "night" };
+      const postNight = { ...hours[0], time: "night" };
+      setForecastData([
+        preMorning,
+        morning,
+        afternoon,
+        evening,
+        night,
+        postNight,
+      ]);
+    }
+  }, [forecast]);
+
+  useEffect(() => {
+    console.log("Forecast data = ", forecastData);
+  }, [forecastData]);
 
   return (
     <div className="flex pb-4 justify-between max-h-[400px] flex-1">
       <div className="w-[65%] flex flex-col">
         {/* graph heading */}
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center">
           <h3 className="text-2xl font-medium">Today's Temperature</h3>
         </div>
 
         {/* graph */}
-        <div className="w-full h-full flex justify-center relative overflow-x-hidden">
+        <div className="w-full h-full flex justify-center relative overflow-hidden">
           {/* line-graph and axis */}
-          <div className="h-full w-[135%] flex flex-col gap-2 absolute">
-            <ResponsiveContainer width={"100%"}>
-              <LineChart data={data}  margin={{ top: 50, bottom: 10 }}>
-                <CartesianGrid
-                  horizontal={false}
-                  vertical={false}
-                  strokeWidth={1.5}
-                  stroke="#efefef"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="temp"
-                  stroke="#ff9124"
-                  strokeWidth={1.5}
-                  label={<CustomizedLabel />}
-                  dot={{
-                    fill: "#ff9124",
-                    stroke: "#ff9124",
-                    strokeWidth: 1.2,
-                    r: 4,
-                  }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-            <div className="flex justify-between h-[80px]">
-              {data.map(({ time, temp }) => {
-                return <XAxisLabel temp={temp} time={time} />;
+          <div className="h-full w-[135%] flex flex-col justify-between absolute">
+            <div className="w-full" style={{height: "calc(100% - 80px)"}}>
+              <ResponsiveContainer width={"100%"} height={"100%"}>
+                <LineChart data={forecastData} margin={{ top: 60, bottom: 10 }}>
+                  <CartesianGrid
+                    horizontal={false}
+                    vertical={false}
+                    strokeWidth={1.5}
+                    stroke="#efefef"
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="temp_c"
+                    stroke="#ff9124"
+                    strokeWidth={1.5}
+                    label={<CustomizedLabel />}
+                    dot={{
+                      fill: "#ff9124",
+                      stroke: "#ff9124",
+                      strokeWidth: 1.2,
+                      r: 4,
+                    }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="h-[80px] flex justify-between items-center">
+              {forecastData.map(({ time, temp_c }) => {
+                return <XAxisLabel temp={temp_c} time={time} />;
               })}
             </div>
           </div>
           {/* side smooth fades */}
-          <div className="w-full h-[0px] absolute right-0 left-0 top-0 bg-gradient-to-b from-slate-50 to-transparent"></div>
-          <div className="w-[50px] absolute right-0 top-0 bottom-0 bg-gradient-to-r from-transparent to-slate-50"></div>
-          <div className="w-[50px] absolute left-0 top-0 bottom-0 bg-gradient-to-r from-slate-50 to-transparent"></div>
+          <div className="w-full h-[10px] absolute right-0 left-0 top-0 bg-gradient-to-b from-slate-50 to-transparent"></div>
+          <div className="w-[30px] absolute right-0 top-0 bottom-0 bg-gradient-to-r from-transparent to-slate-50"></div>
+          <div className="w-[30px] absolute left-0 top-0 bottom-0 bg-gradient-to-r from-slate-50 to-transparent"></div>
         </div>
       </div>
 
@@ -122,8 +141,10 @@ type XAxisLabelProps = {
 const XAxisLabel = ({ temp, time }: XAxisLabelProps) => {
   return (
     <div className="w-[1px] first-of-type:invisible last-of-type:invisible">
-      <div className="h-full w-full flex flex-col items-center gap-2">
-        <span className="text-xl font-medium text-slate-800">{`${temp}°`}</span>
+      <div className="w-full flex flex-col items-center gap-2">
+        <span className="text-xl font-medium text-slate-800">{`${Math.round(
+          temp
+        )}°`}</span>
         <span className="text-slate-400"> {time} </span>
       </div>
     </div>

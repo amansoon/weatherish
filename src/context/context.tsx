@@ -8,7 +8,7 @@ import { AppAction, AppActionType, AppState } from "@/@types/appglobal";
 const AppContext = createContext("app");
 
 const initialState: AppState = {
-  city: "gwalior",
+  city: "shimla",
   weather: null,
   astronomy: null,
   forecast: null,
