@@ -299,7 +299,7 @@ const weatherConditions = [
 ];
 
 const initialState: AppState = {
-  city: "hongkong",
+  city: "delhi",
   weather: null,
   astronomy: null,
   forecast: null,

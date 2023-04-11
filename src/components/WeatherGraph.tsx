@@ -119,7 +119,7 @@ function WeatherGraph() {
       </div>
 
       {/* tomorrow */}
-      <div className="w-[30%] flex flex-col justify-between rounded-2xl p-6 bg-[url('/weather/sky.png')] bg-cover">
+      <div className="w-[30%] flex flex-col justify-between rounded-2xl p-6  bg-gradient-to-r from-[#fadfff] to-[#ffd7f9]">
         <div className="flex flex-col gap-2">
           <div> Tomorrow </div>
           <div className="text-2xl font-medium"> Saudi Arabia </div>
