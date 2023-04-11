@@ -16,7 +16,7 @@ function Sidebar() {
           <div className="font-medium text-xl mb-1"> Wednesday </div>
           <div className="text-slate-600"> Florida, India </div>
         </div>
-        <div className="text-4xl font-medium text-orange-500"> 24°C </div>
+        <div className="text-4xl font-medium text-orange-500"> {Math.round(weather?.current.temp_c) + "°C"}  </div>
       </header>
 
       <AstroPieChart astronomy={astronomy} />
@@ -32,10 +32,10 @@ function Sidebar() {
 }
 
 type UVIndexProps = {
-   uvIndex: number
-}
+  uvIndex: number;
+};
 
-const UVIndex = ({ uvIndex } : UVIndexProps) => {
+const UVIndex = ({ uvIndex }: UVIndexProps) => {
   const [message, setMessage] = useState<string>();
   const [level, setLevel] = useState<string>();
 
@@ -68,13 +68,9 @@ const UVIndex = ({ uvIndex } : UVIndexProps) => {
       <div className="flex flex-col gap-3">
         <div className="leading-none flex items-center gap-4">
           <span className="text-2xl"> {uvIndex} UVI </span>
-          <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium">
-            {level}
-          </span>
+          <span className="px-4 py-1 rounded-full bg-yellow-200 text-black text-sm font-medium">{level}</span>
         </div>
-        <div className="text-slate-400">
-          {level} risk of UV rays.
-        </div>
+        <div className="text-slate-400">{level} risk of UV rays.</div>
       </div>
     </div>
   );
